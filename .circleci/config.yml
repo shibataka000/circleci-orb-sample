@@ -1,0 +1,12 @@
+version: 2.1
+orbs:
+  aws-eks: circleci/aws-eks@0.2.3
+workflows:
+  deployment:
+    jobs:
+      - aws-eks/create-cluster:
+          cluster-name: circleci-orb-eks-demo
+      - aws-eks/delete-cluster:
+          cluster-name: circleci-orb-eks-demo
+          requires:
+            - aws-eks/create-cluster
